@@ -1,21 +1,28 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 class Login extends React.Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             query:''
+             query:"",
+             password:""
         }
-    }
-    
-    componentDidMount = () =>{
-
     }
 
     handleSubmit = (e) =>{
         e.preventDefault();
+        let user = {
+            query: this.state.query,
+            password: this.state.password
+        }
+        axios.post('http://localhost:5000/user/login',user).then((res) =>{
+            console.log(res)
+        }).catch((err) =>{
+            console.log(err);
+        })
     }
 
 
@@ -41,8 +48,8 @@ class Login extends React.Component {
                                     <input onChange={e => this.setState({password: e.target.value})} type="password" className="form-control"  placeholder="Password" />
                                 </div>
                                 <div className="row px-5 mt-3">
-                                    <button type="submit" className="btn btn-danger">Signup</button>
-                                    <a style={{textDecoration:"none"}} href="." className="mt-3">Forgot Password ?</a>
+                                    <button type="submit" className="btn btn-danger">Login</button>
+                                    <Link to="/forgot" style={{textDecoration:"none"}}  className="mt-3">Forgot Password ?</Link>
                                 </div>
                             </form>
                         </div>

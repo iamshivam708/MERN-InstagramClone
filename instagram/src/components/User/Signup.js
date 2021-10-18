@@ -30,43 +30,43 @@ function Signup() {
                             <form>
                                 <div className="row mb-2">
                                     <div className="col-6">
-                                        <input onChange={e => setFirstName(e.target.value)} type="text" className="form-control" id="firstName" placeholder="First name" />
+                                        <input required onChange={e => setFirstName(e.target.value)} type="text" className="form-control" id="firstName" placeholder="First name" />
                                     </div>
                                     <div className="col-6">
-                                        <input onChange={e => setSurName(e.target.value)} type="text" className="form-control" id="lastName" placeholder="Surname" />
+                                        <input required onChange={e => setSurName(e.target.value)} type="text" className="form-control" id="lastName" placeholder="Surname" />
                                      </div>    
                                 </div>
                                 <div className="mb-2">
-                                    <input onChange={e => setUserName(e.target.value)} type="text" className="form-control" id="username" placeholder="Username" />
+                                    <input required onChange={e => setUserName(e.target.value)} type="text" className="form-control" id="username" placeholder="Username" />
                                 </div>
                                 <div className="mb-2">
-                                    <input onChange={e => setEmail(e.target.value)} type="email" className="form-control" id="email" placeholder="Email" />
+                                    <input required onChange={e => setEmail(e.target.value)} type="email" className="form-control" id="email" placeholder="Email" />
                                 </div>
                                 <div className="mb-2">
-                                    <input onChange={e => setPhone(e.target.value)} type="text" className="form-control" id="mobile" placeholder="Mobile" />
+                                    <input required onChange={e => setPhone(e.target.value)} type="text" className="form-control" id="mobile" placeholder="Mobile" />
                                 </div>
                                 <div className="mb-2">
-                                    <input onChange={e => setPassword(e.target.value)} type="password" className="form-control" id="password" placeholder="Password" />
+                                    <input required onChange={e => setPassword(e.target.value)} type="password" className="form-control" id="password" placeholder="Password" />
                                 </div>
                                 <div className="row mb-2">
                                     <p style={{fontSize:"0.8em"}} className="text-muted" align="start">Date of birth</p>
                                     <div className="col-4">
-                                        <input onChange={e => setDay(e.target.value)} type="text" className="form-control" id="day" placeholder="Day" />
+                                        <input required onChange={e => setDay(e.target.value)} type="text" className="form-control" id="day" placeholder="Day" />
                                     </div>
                                     <div className="col-4">
-                                        <input onChange={e => setMonth(e.target.value)} type="text" className="form-control" id="month" placeholder="Month" />
+                                        <input required onChange={e => setMonth(e.target.value)} type="text" className="form-control" id="month" placeholder="Month" />
                                      </div>
                                      <div className="col-4">
-                                        <input onChange={e => setYear(e.target.value)} type="text" className="form-control" id="year" placeholder="Year" />
+                                        <input required onChange={e => setYear(e.target.value)} type="text" className="form-control" id="year" placeholder="Year" />
                                     </div>    
                                 </div>
                                 <div className="row mb-2">
                                     <p style={{fontSize:"0.8em"}} className="text-muted" align="start">Gender</p>
                                     <div className="col-6">
-                                        <input onChange={e => setGender(e.target.value)} type="text" className="form-control" id="male" placeholder="Male" />
+                                        <input required onChange={e => setGender(e.target.value)} type="text" className="form-control" id="male" placeholder="Male" />
                                     </div>
                                     <div className="col-6">
-                                        <input type="text" className="form-control" id="female" placeholder="Female" />
+                                        <input required type="text" className="form-control" id="female" placeholder="Female" />
                                      </div>    
                                 </div>
                                 <div className="row">

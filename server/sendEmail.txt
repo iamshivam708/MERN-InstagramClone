@@ -1,0 +1,31 @@
+const nodemailer = require('nodemailer')
+
+//forget password
+router.post("/forgot", (req,res) =>{
+
+  const transporter = nodemailer.createTransport({
+    service:"hotmail",
+    auth:{
+      user:"shivam7084371026@outlook.com",
+      secure: false,
+      pass:"Shivam@123"
+    },
+    tls: {
+      rejectUnauthorized: false
+  }
+  })
+  
+  const options = {
+    from:"shivam7084371026@outlook.com",
+    to:req.body.user,
+    subject:"forgot password",
+    text:`type this to apply for new password - ${req.body.number}`
+  }
+  transporter.sendMail(options, function(err, info){
+    if(err){
+      res.send(err)
+      return
+    }
+    res.send(info.response)
+  })
+})
