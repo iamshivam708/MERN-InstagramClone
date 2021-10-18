@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const User = require("../models/User")
 const bcrypt = require("bcryptjs");
+
 const multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,8 +16,8 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage })
 
 //signup
-router.post('/signup',upload.single('profile') ,async (req,res) =>{
-    await User.create({
+router.post('/signup',upload.single('profile') ,(req,res) =>{
+    User.create({
         firstName:req.body.firstName,
         surName:req.body.surName,
         userName:req.body.userName,
@@ -35,6 +36,17 @@ router.post('/signup',upload.single('profile') ,async (req,res) =>{
             res.status(200).send(result)
         }
     })
+})
+
+//login 
+router.post('/login', async(req,res) =>{
+  User.find().or([{ email: req.body.query }, { userName: req.body.query }]).exec((err,result) =>{
+    if(err || !result){
+      res.status(400).send(err)
+    }else{
+      res.status(200).send(result);
+    }
+  })
 })
 
 module.exports = router

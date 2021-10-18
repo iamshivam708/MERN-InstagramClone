@@ -13,6 +13,10 @@ constructor(props) {
     }
 }
 
+componentDidMount = () =>{
+    console.log(this.state.user)
+}
+
 handleProfile = (e) =>{
     const reader = new FileReader();
     reader.onload = () =>{
@@ -21,50 +25,28 @@ handleProfile = (e) =>{
         }
     }
     reader.readAsDataURL(e.target.files[0])
-
     this.setState({
-        profile:e.target.files[0].name
+        profile:e.target.files
     });
 }
 
 handleSubmit = (e) =>{
     e.preventDefault();
-    if(this.state.profile === ''){
-        alert("no photo selected");
-    }
-    // const user = {
-    //     firstName:this.state.user.firstName,
-    //     surName:this.state.user.surName,
-    //     userName:this.state.user.userName,
-    //     email:this.state.user.email,
-    //     phone:this.state.user.phone,
-    //     hashedPassword:this.state.user.hashedPassword,
-    //     day:this.state.user.day,
-    //     month:this.state.user.month,
-    //     year:this.state.user.year,
-    //     gender:this.state.user.gender,
-    //     profile:this.state.profile
-    // }
-    // axios.post("http://localhost:5000/user/signup",user).then((res) =>{
-    //     if(res.data.error.keyValue.email){
-    //         alert("email already exists")
-    //     }
-    //     else if(res.data.error.keyValue.userName){
-    //         alert("Username already exists")
-    //     }else{
-    //         console.log(res.data)
-    //     }
-
-    //     if(res.data){
-    //         console.log(res.data)
-    //     }
-    // }).catch((err)=>{
-    //     console.log(err)
-    // })
-
+    var form = document.getElementById('form');
+    var formData = new FormData(form);
+    axios.post("http://localhost:5000/user/signup",formData).then((res) =>{
+        if(res.data.error){
+            alert("username or email is already used");
+        }else{
+            this.props.history.push('/login');
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
 }
 
 render(){
+    const {user} = this.state
     return (
         <div className="AfterSignup">
             <div className="container mt-2">
@@ -85,9 +67,19 @@ render(){
                                 </div>
                                 <div className="col-4"></div>
                             </div>
-                            <form encType="multipart/form-data" onSubmit={this.handleSubmit} className='mt-4'>
+                            <form id="form" encType="multipart/form-data" onSubmit={this.handleSubmit} className='mt-4'>
+                            <input style={{display:"none"}} type="text" name="firstName" value={user.firstName} readOnly/>
+                            <input style={{display:"none"}} type="text" name="surName" value={user.surName} readOnly/>
+                            <input style={{display:"none"}} type="text" name="userName" value={user.userName} readOnly/>
+                            <input style={{display:"none"}} type="text" name="email" value={user.email} readOnly/>
+                            <input style={{display:"none"}} type="text" name="phone" value={user.phone} readOnly/>
+                            <input style={{display:"none"}} type="text" name="hashedPassword" value={user.hashedPassword} readOnly/>
+                            <input style={{display:"none"}} type="text" name="day" value={user.day} readOnly/>
+                            <input style={{display:"none"}} type="text" name="month" value={user.month} readOnly/>
+                            <input style={{display:"none"}} type="text" name="year" value={user.year} readOnly/>
+                            <input style={{display:"none"}} type="text" name="gender" value={user.gender} readOnly/>
                                 <div className="mb-2 mt-3">
-                                    <input name="image-upload" id="input" accept="image/*" onChange={this.handleProfile} type="file" className="form-control"/>
+                                    <input name="profile" onChange={this.handleProfile} type="file" className="form-control"/>
                                 </div>
                                 <div className="row mt-3" align="start">
                                     <button type="submit" className="btn btn-danger">Signup</button>

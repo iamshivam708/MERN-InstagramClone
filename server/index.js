@@ -9,7 +9,6 @@ app.use(bodyParser.json())
 app.use(cors());
 require('dotenv').config()
 
-
 //routes
 const UserRouter = require('./routes/User')
 app.use('/user',UserRouter)

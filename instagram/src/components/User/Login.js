@@ -2,6 +2,23 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             query:''
+        }
+    }
+    
+    componentDidMount = () =>{
+
+    }
+
+    handleSubmit = (e) =>{
+        e.preventDefault();
+    }
+
+
     render(){
     return (
         <div className="signup">
@@ -16,15 +33,15 @@ class Login extends React.Component {
                             <h4>Login to your account</h4>
                             <p className="text-muted">Login to see photos and videos from your friends.</p>
                             <hr/>
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="mb-2">
-                                    <input type="email" className="form-control" id="email" placeholder="Phone number, email or username" />
+                                    <input onChange={e => this.setState({query: e.target.value})} type="text" className="form-control"  placeholder="Email or username" />
                                 </div>
                                 <div className="mb-2">
-                                    <input type="password" className="form-control" id="password" placeholder="Password" />
+                                    <input onChange={e => this.setState({password: e.target.value})} type="password" className="form-control"  placeholder="Password" />
                                 </div>
                                 <div className="row px-5 mt-3">
-                                    <button className="btn btn-danger">Signup</button>
+                                    <button type="submit" className="btn btn-danger">Signup</button>
                                     <a style={{textDecoration:"none"}} href="." className="mt-3">Forgot Password ?</a>
                                 </div>
                             </form>
