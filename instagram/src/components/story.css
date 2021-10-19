@@ -1,0 +1,32 @@
+/* external css: flickity.css */
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+.carousel {
+  background: #EEE;
+}
+
+.carousel-cell {
+  width: 25%;
+  height: 80px;
+  margin-right: 10px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+  float:left;
+}
+
+.carousel-cell.is-selected {
+  background: #ED2;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: carousel-cell;
+  font-size: 80px;
+  color: white;
+}

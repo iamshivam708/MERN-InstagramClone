@@ -19,7 +19,10 @@ class Login extends React.Component {
             password: this.state.password
         }
         axios.post('http://localhost:5000/user/login',user).then((res) =>{
-            console.log(res)
+            sessionStorage.setItem("email", res.data.user.email);
+            sessionStorage.setItem("username", res.data.user.userName);
+            sessionStorage.setItem("loggedIn", "true");
+            this.props.history.push("/");
         }).catch((err) =>{
             console.log(err);
         })

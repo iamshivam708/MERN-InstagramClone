@@ -70,6 +70,17 @@ router.post("/update", async (req,res) =>{
   }
 })
 
+//get all user except current 
+router.post("/getAllUsers", async(req,res) =>{
+  await User.find({ email : { $ne : req.body.email } } ).exec((err,user)=>{
+    if(err || !user){
+      res.send('error')
+    }else{
+    res.status(200).send(user)
+    }
+  })
+})
+
 //forget password
 router.post("/forgot", (req,res) =>{
 

@@ -28,7 +28,7 @@ class ForgotPassword extends React.Component {
 
     handleNumber = (e) =>{
         e.preventDefault();
-        if(this.state.number == this.state.sendNumber){
+        if(this.state.number === this.state.sendNumber){
             this.props.history.push("/newPassword" + this.state.email)
         }else{
             alert("number is wrong")
