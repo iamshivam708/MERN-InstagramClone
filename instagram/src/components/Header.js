@@ -5,14 +5,19 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      user: sessionStorage.getItem('profile')
+    };
   }
 
   componentDidMount = () => {};
 
   handleLogout = (e) => {
     e.preventDefault();
-    console.log("button clicked");
+   sessionStorage.removeItem('email');
+   sessionStorage.removeItem('username');
+   sessionStorage.removeItem('loggedIn');
+   window.location.reload();
   };
 
   render() {
@@ -54,6 +59,11 @@ class Header extends Component {
                   <i className="far fa-envelope fa-2x"></i>
                 </a>
               </li>
+              {/* <li>
+                <a href="." className="nav-link px-2 link-dark mt-1">
+                  <i className="far fa-heart fa-2x"></i>
+                </a>
+              </li> */}
               <li>
                 <div className="dropdown mt-2">
                   <button
@@ -65,7 +75,7 @@ class Header extends Component {
                   >
                     <img
                       alt="user"
-                      src="/avatar.jpg"
+                      src={"/user/"+ this.state.user}
                       height="40px"
                       width="40px"
                     />

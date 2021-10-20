@@ -13,6 +13,9 @@ require('dotenv').config()
 const UserRouter = require('./routes/User')
 app.use('/user',UserRouter)
 
+const FollowRouter = require('./routes/Follow')
+app.use('/follow',FollowRouter)
+
 //database connection
 mongoose.connect(process.env.DATABASE).then(() =>{
     console.log("database connected")

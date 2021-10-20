@@ -54,6 +54,18 @@ router.post('/login', async(req,res) =>{
   }
 })
 
+//get user from email
+router.get("/:email", async (req,res) =>{
+  User.find({email:req.params.email}).exec((err,user)=>{
+    if(err || !user){
+      res.send('error')
+    }else{
+    res.status(200).send(user)
+    }
+  })
+})
+
+
 //updating user password with new password after he successfully entered the number given in his gmail
 router.post("/update", async (req,res) =>{
   const filter = {email: req.body.email}

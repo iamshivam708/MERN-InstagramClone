@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header'
-import Story from './Story'
-import SuggetedUsers from './User/SuggetedUsers'
+// import Story from './Story'
+import SuggestedUsers from './User/SuggestedUsers'
 //import axios from 'axios';
 
 class Main extends Component {
@@ -27,10 +27,10 @@ class Main extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-8">
-                        <Story/>
+                        {/* <Story/> */}
                         </div>
                         <div className="col-4">
-                            <SuggetedUsers/>
+                            <SuggestedUsers/>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-class SuggetedUsers extends Component {
+class SuggestedUsers extends Component {
     constructor(props) {
         super(props)
     
@@ -30,10 +30,16 @@ class SuggetedUsers extends Component {
                 <div className="container-fluid" align="center">
                     <h5 style={{padding:"10px 0px",background:"#eeeeee"}}>Suggested users</h5>
                     {this.state.suggestedUsers.map((user) =>(
-                    <div style={{background:"#fafafa"}} className="row mt-3 px-3 py-3" key={user._id} align="center">
-                        <img src={"/user/"+user.profile} height="50px" width="20px" alt="user profile" />
-                        <p className="text-muted">{user.firstName}&nbsp;{user.surName}</p>
-                        <button className="btn btn-danger" ><i className="fas fa-heart"></i>&nbsp;&nbsp;Follow</button>
+                    <div style={{background:"#fafafa"}} className="row mt-3 px-3" key={user._id} align="center">
+                        <div className="col-4">
+                            <img src={"/user/"+user.profile} height="100%" width="100%" alt="user profile" />
+                        </div>
+                        <div className="col-4 mt-3">
+                            <p className="text-muted">{user.userName}</p>
+                        </div>
+                        <div className="col-4 mt-2">
+                            <button style={{border:"none",background:"none"}} className="nav-link">Follow</button>
+                        </div>
                     </div>
                     ))}
                 </div>
@@ -42,4 +48,4 @@ class SuggetedUsers extends Component {
     }
 }
 
-export default SuggetedUsers
+export default SuggestedUsers

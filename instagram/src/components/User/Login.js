@@ -21,6 +21,7 @@ class Login extends React.Component {
         axios.post('http://localhost:5000/user/login',user).then((res) =>{
             sessionStorage.setItem("email", res.data.user.email);
             sessionStorage.setItem("username", res.data.user.userName);
+            sessionStorage.setItem("profile", res.data.user.profile);
             sessionStorage.setItem("loggedIn", "true");
             this.props.history.push("/");
         }).catch((err) =>{
