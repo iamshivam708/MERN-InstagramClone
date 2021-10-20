@@ -23,6 +23,25 @@ class SuggestedUsers extends Component {
             console.log(err)
         })
     }
+
+    handleFollow(email){
+        return event =>{
+            event.preventDefault();
+            let user = {
+                userEmail: email,
+                followerEmail:this.state.email
+            }
+            axios.post("http://localhost:5000/follow/add", user).then((res) =>{
+                if(res.data.error){
+                    alert(res.data.error)
+                }else{
+                    console.log(res.data);
+                }
+            }).catch((err) =>{
+                console.log(err);
+            })
+        }
+    }
     
     render() {
         return (
@@ -38,7 +57,7 @@ class SuggestedUsers extends Component {
                             <p className="text-muted">{user.userName}</p>
                         </div>
                         <div className="col-4 mt-2">
-                            <button style={{border:"none",background:"none"}} className="nav-link">Follow</button>
+                            <button onClick={this.handleFollow(user.email)} style={{border:"none",background:"none"}} className="nav-link">Follow</button>
                         </div>
                     </div>
                     ))}

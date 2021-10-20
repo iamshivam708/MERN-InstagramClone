@@ -10,7 +10,9 @@ class User extends Component {
              email: sessionStorage.getItem('email'),
              user:[],
              following:0,
-             followers:0
+             followers:0,
+             followingDetails:[],
+             followersDetails:[]
         }
     }
 
@@ -41,6 +43,16 @@ class User extends Component {
           console.log(err);
         })
 
+        axios.get(`http://localhost:5000/follow/${this.state.email}`).then((res) =>{
+          this.setState({
+            followingDetails: res.data
+          })
+        }).catch((err) =>{
+          console.log(err);
+        })
+
+
+
         axios.post('http://localhost:5000/follow/followers',user).then((res) =>{
           if(res.data === ''){
             
@@ -49,6 +61,31 @@ class User extends Component {
               followers:res.data.count
             })
           }
+        }).catch((err) =>{
+          console.log(err);
+        })
+
+        axios.get(`http://localhost:5000/follow/followers/${this.state.email}`).then((res) =>{
+          this.setState({
+            followersDetails: res.data
+          })
+        }).catch((err) =>{
+          console.log(err);
+        })
+
+      }
+    }
+
+    handleUnfollow(email){
+      return event =>{
+        event.preventDefault();
+        let user = {
+          userEmail: email,
+          followerEmail: this.state.email
+        }
+        axios.post("http://localhost:5000/follow/unfollow", user).then((res) =>{
+          console.log(res)
+          window.location.reload();
         }).catch((err) =>{
           console.log(err);
         })
@@ -94,8 +131,16 @@ class User extends Component {
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
-                  
-                  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                  {this.state.followingDetails.map((following) =>(
+                      <div className="row mt-3 px-1 py-2" style={{background:"#fafafa"}} key={following._id}>
+                        <div className="col-6">
+                          <h4>{following.userEmail}</h4>
+                        </div>
+                        <div className="col-6" align="end">
+                          <button onClick={this.handleUnfollow(following.userEmail)} type="submit" className="btn btn-danger">Unfollow</button>
+                        </div>
+                      </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -110,8 +155,13 @@ class User extends Component {
                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
-                  
-                  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                {this.state.followersDetails.map((followers) =>(
+                      <div className="row mt-3 px-1 py-2" style={{background:"#fafafa"}} key={followers._id}>
+                        <div className="col-6">
+                          <h4>{followers.userEmail}</h4>
+                        </div>
+                      </div>
+                  ))}
                 </div>
               </div>
             </div>

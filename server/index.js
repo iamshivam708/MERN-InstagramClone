@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 
 //middleware
 const app = express();
@@ -15,6 +16,9 @@ app.use('/user',UserRouter)
 
 const FollowRouter = require('./routes/Follow')
 app.use('/follow',FollowRouter)
+
+const PostRouter = require("./routes/Post")
+app.use('/post', PostRouter)
 
 //database connection
 mongoose.connect(process.env.DATABASE).then(() =>{
