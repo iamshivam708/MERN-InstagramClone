@@ -38,6 +38,11 @@ class Main extends Component {
         }
     }
 
+    handleLike = (e) =>{
+        e.preventDefault();
+        document.getElementById('like').style.color = 'red'
+    }
+
     render() {
         return (
             <div className="Main">
@@ -64,7 +69,18 @@ class Main extends Component {
                             </div>
                             <img src={"/posts/"+post.image} alt="post" height="100%" width="100%" className="card-img-top"/>
                             <div className="card-body" align="start">
-                                <p className="card-text"><img style={{borderRadius:"50%"}} alt="user" src={"/user/" + post.userProfile} height="50px" width="50px" />&nbsp;&nbsp;{post.description}</p>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <img style={{float:"left"}} alt="user" src={"/user/" + post.userProfile} height="50px" width="50px" />
+                                        <p className="card-text">&nbsp;&nbsp;{post.description}</p>
+                                    </div>
+                                    <div className="col-6">
+                                        <i style={{color:"#bdbdbd"}} id="like" onClick={this.handleLike} className="fas fa-heart fa-2x"></i>
+                                        <i style={{color:"#bdbdbd",marginLeft:"20px"}} id="comment" onClick={this.handleLike} className="fas fa-comment fa-2x"></i>
+                                        <i style={{color:"#bdbdbd",marginLeft:"20px"}} id="share" onClick={this.handleLike} className="fas fa-paper-plane fa-2x"></i>
+                                        <i style={{color:"#bdbdbd",marginLeft:"20px"}} id="save" onClick={this.handleLike} className="fas fa-bookmark fa-2x"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div className="card-footer text-muted">
                                 2 days ago

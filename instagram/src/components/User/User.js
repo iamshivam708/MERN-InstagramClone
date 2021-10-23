@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Header from '../Header'
+import {Link} from 'react-router-dom'
 
 class User extends Component {
     constructor(props) {
@@ -14,8 +15,7 @@ class User extends Component {
              followingDetails:[],
              followersDetails:[],
              posts:[],
-             post:0,
-             singlePost:[]
+             post:0
         }
     }
 
@@ -159,9 +159,9 @@ class User extends Component {
           <div className="row" style={{padding:"0px 100px"}}>
             {this.state.posts.map((post) =>(
                 <div key={post._id} id="post" className="col-4 mb-4">
-                  <button key={post._id} style={{border:"none",background:"none",height:"250px"}} data-bs-toggle="modal" data-bs-target="#staticBackdropPost">
-                    <img id="picture" src={"/posts/"+post.image} height="100%" width="100%" alt="post" />
-                  </button>
+                  <Link to={"/single/post/" + post._id} style={{border:"none",background:"none"}}>
+                    <img style={{borderRadius:"5%"}} id="picture" src={"/posts/"+post.image} height="100%" width="100%" alt="post" />
+                  </Link>
                 </div>
             ))}
           </div>
@@ -208,29 +208,6 @@ class User extends Component {
                           <button onClick={this.handleRemove(followers.followerEmail)} type="submit" className="btn btn-danger">X Remove</button>
                         </div>
                       </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-           {/* post */}
-           <div className="modal fade" id="staticBackdropPost" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-scrollable mt-5" style={{marginLeft:"20%"}}>
-              <div className="modal-content" style={{width:"60vw"}}>
-                <div className="modal-body" style={{height:"70vh"}}>
-                  {this.state.posts.map((post) =>(
-                  <div key={post._id} className="row" style={{margin:0,padding:0}}>
-                    <div className="col-7" style={{height:"65vh",margin:"0px",padding:"0px"}}>
-                      <img src={"/posts/"+ post.image} height="100%" width="100%" alt="post"/>
-                    </div>
-                    <div className="col-5">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="staticBackdropLabel">{post.title}</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    </div>
-                  </div>
                   ))}
                 </div>
               </div>

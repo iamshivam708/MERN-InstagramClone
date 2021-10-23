@@ -7,6 +7,7 @@ import NewPassword from './components/User/NewPassword';
 import Main from './components/Main';
 import User from './components/User/User';
 import CreatePost from './components/Post/CreatePost';
+import SinglePost from './components/Post/SinglePost';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/newPassword/:email" component={NewPassword}/>
         <Route exact path="/user" component={User} />
         <Route exact path="/create" component={CreatePost}/>
+        <Route exact path="/single/post/:id" component={SinglePost}/>
       </Switch>
     </BrowserRouter>
   );

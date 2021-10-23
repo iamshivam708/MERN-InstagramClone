@@ -25,8 +25,8 @@ class Header extends Component {
       <div className="Header">
         <div className="container">
           <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
             >
               <img
@@ -36,7 +36,7 @@ class Header extends Component {
                 height="50px"
                 alt="logo"
               />
-            </a>
+            </Link>
 
             <div className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
               <form>
@@ -50,9 +50,9 @@ class Header extends Component {
 
             <ul className="nav col-md-3 mb-2 justify-content-center mb-md-0 text-end">
               <li>
-                <a href="." className="nav-link px-2 link-secondary">
+                <Link to="/" className="nav-link px-2 link-secondary">
                   <i className="fas fa-home fa-2x"></i>
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/create" className="nav-link mt-1 px-2 link-secondary">
@@ -83,6 +83,7 @@ class Header extends Component {
                       src={"/user/"+ this.state.user}
                       height="40px"
                       width="40px"
+                      style={{borderRadius:"50%"}}
                     />
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dLabel">

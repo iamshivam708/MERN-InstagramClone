@@ -64,7 +64,7 @@ class SuggestedUsers extends Component {
                     {this.state.suggestedUsers.map((user) =>(
                     <div style={{background:"#fafafa"}} className="row mt-3 px-3" key={user._id} align="center">
                         <div className="col-4">
-                            <img src={"/user/"+user.profile} height="100%" width="100%" alt="user profile" />
+                            <img style={{borderRadius:"50%"}} src={"/user/"+user.profile} height="100%" width="100%" alt="user profile" />
                         </div>
                         <div className="col-4 mt-3">
                             <p className="text-muted">{user.userName}</p>
