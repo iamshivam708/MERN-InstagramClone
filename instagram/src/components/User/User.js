@@ -156,13 +156,13 @@ class User extends Component {
           
           <div className="row mt-4" align="center">
           <p className="text-muted"><i className="fas fa-th"></i> Posts</p>
-          <div className="row">
+          <div className="row" style={{padding:"0px 100px"}}>
             {this.state.posts.map((post) =>(
-              <button key={post._id} style={{border:"none",background:"none"}} data-bs-toggle="modal" data-bs-target="#staticBackdropPost">
-                <div  id="post" className="col-4 mb-4" style={{height:"300px"}}>
-                  <img id="picture" src={"/posts/"+post.image} height="100%" width="100%" alt="post" />
+                <div key={post._id} id="post" className="col-4 mb-4">
+                  <button key={post._id} style={{border:"none",background:"none",height:"250px"}} data-bs-toggle="modal" data-bs-target="#staticBackdropPost">
+                    <img id="picture" src={"/posts/"+post.image} height="100%" width="100%" alt="post" />
+                  </button>
                 </div>
-              </button>
             ))}
           </div>
 

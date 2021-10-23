@@ -28,7 +28,7 @@ class CreatePost extends Component {
         return (
             <div className="createPost">
                <Header/> 
-               <div className="container mt-4 px-5">
+               <div className="container mt-4" style={{padding:"50px 200px",background:"#eeeeee"}}>
                    <h4 className="text-center">Create Post</h4>
                    <form id="form" encType="multipart/form-data" onSubmit={this.handleCreate}>
                        <input type="text" name="userName" defaultValue={this.state.name} style={{display:'none'}} />
