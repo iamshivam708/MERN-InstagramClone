@@ -20,6 +20,12 @@ app.use('/follow',FollowRouter)
 const PostRouter = require("./routes/Post")
 app.use('/post', PostRouter)
 
+const CommentRouter = require('./routes/Comment')
+app.use('/comment', CommentRouter)
+
+const SavedPOstRouter = require('./routes/SavedPost')
+app.use('/saved', SavedPOstRouter)
+
 //database connection
 mongoose.connect(process.env.DATABASE).then(() =>{
     console.log("database connected")

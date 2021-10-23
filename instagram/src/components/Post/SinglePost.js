@@ -8,7 +8,9 @@ class SinglePost extends Component {
     
         this.state = {
              id:this.props.match.params.id,
-             post:[]
+             post:[],
+             email: sessionStorage.getItem('email'),
+             comments:[]
         }
     }
 
@@ -17,10 +19,22 @@ class SinglePost extends Component {
             this.setState({
                 post: res.data
             })
-            console.log(res.data)
         }).catch((err) =>{
             console.log(err);
         })
+
+        axios.get(`http://localhost:5000/comment/${this.state.id}`).then((res) =>{
+          console.log(res.data)
+          this.setState({
+            comments: res.data
+          })
+        }).catch((err) =>{
+          console.log(err);
+        })
+    }
+
+    handleComment = () =>{
+      
     }
     
   render() {
@@ -43,8 +57,30 @@ class SinglePost extends Component {
                                 <p><span style={{fontSize:"24px"}}>{post.title}</span><br/> <span style={{fontSize:"14px"}} className="text-muted mt-2">{post.description}</span></p>
                               </div>
                               <div className="col-4">
-                              <Link to="/user" style={{color:"#9e9e9e"}}><i className="fas fa-arrow-left fa-2x"></i></Link>
+                                <Link to={"/user/" + this.state.email} style={{color:"#9e9e9e"}}><i className="fas fa-arrow-left fa-2x"></i></Link>
                               </div>
+                            </div>
+                            {this.state.comments.map((comment) =>(
+                                <div key={comment._id} className="row mt-3" style={{scrollBehavior:"auto"}}>
+                                    <div className="col-3">
+                                      <img alt="post" style={{borderRadius:"50%"}} src={"/posts/"+comment.userProfile} height="50px" width="50px" />
+                                    </div>
+                                    <div className="col-9 text-start">
+                                        <p>{comment.comment}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            <div className="container px-5 card-footer text-muted fixed-bottom">
+                                <form id="form" onSubmit={this.handleComment(post._id)}>
+                                    <div className="row">
+                                        <div className='col-10'>
+                                            <input onChange={e => this.setState({comment: e.target.value})} type="text" className="form-control" placeholder="Add a comment" />
+                                        </div>
+                                        <div className='col-2'>
+                                            <button className="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                       </div>

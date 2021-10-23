@@ -8,14 +8,15 @@ class User extends Component {
         super(props)
     
         this.state = {
-             email: sessionStorage.getItem('email'),
+             email:this.props.match.params.email,
              user:[],
              following:0,
              followers:0,
              followingDetails:[],
              followersDetails:[],
              posts:[],
-             post:0
+             post:0,
+             emailCheck: sessionStorage.getItem('email')
         }
     }
 
@@ -180,9 +181,9 @@ class User extends Component {
                         <div className="col-6">
                           <h4>{following.userEmail}</h4>
                         </div>
-                        <div className="col-6" align="end">
-                          <button onClick={this.handleUnfollow(following.userEmail)} type="submit" className="btn btn-danger">Unfollow</button>
-                        </div>
+                              <div className="col-6" align="end">
+                                <button onClick={this.handleUnfollow(following.userEmail)} type="submit" className="btn btn-danger">Unfollow</button>
+                              </div>
                       </div>
                   ))}
                 </div>
@@ -204,9 +205,9 @@ class User extends Component {
                         <div className="col-6">
                           <h4>{followers.followerEmail}</h4>
                         </div>
-                        <div className="col-6" align="end">
-                          <button onClick={this.handleRemove(followers.followerEmail)} type="submit" className="btn btn-danger">X Remove</button>
-                        </div>
+                                  <div className="col-6" align="end">
+                                    <button onClick={this.handleRemove(followers.followerEmail)} type="submit" className="btn btn-danger">X Remove</button>
+                                  </div>
                       </div>
                   ))}
                 </div>

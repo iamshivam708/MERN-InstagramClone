@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class SuggestedUsers extends Component {
     constructor(props) {
@@ -67,7 +68,7 @@ class SuggestedUsers extends Component {
                             <img style={{borderRadius:"50%"}} src={"/user/"+user.profile} height="100%" width="100%" alt="user profile" />
                         </div>
                         <div className="col-4 mt-3">
-                            <p className="text-muted">{user.userName}</p>
+                            <Link style={{textDecoration:"none"}} to={"/user/" + user.email}><p className="text-muted">{user.userName}</p></Link>
                         </div>
                         <div className="col-4 mt-2">
                             <button onClick={this.handleFollow(user.email)} style={{border:"none",background:"none"}} className="nav-link">Follow</button>

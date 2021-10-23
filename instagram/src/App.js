@@ -8,6 +8,7 @@ import Main from './components/Main';
 import User from './components/User/User';
 import CreatePost from './components/Post/CreatePost';
 import SinglePost from './components/Post/SinglePost';
+import SavedPost from './components/Post/SavedPost';
 
 function App() {
   return (
@@ -19,9 +20,10 @@ function App() {
         <Route exact path="/aftersignup" component={AfterSignup}/>
         <Route exact path="/forgot" component={ForgotPassword}/>
         <Route exact path="/newPassword/:email" component={NewPassword}/>
-        <Route exact path="/user" component={User} />
+        <Route exact path="/user/:email" component={User} />
         <Route exact path="/create" component={CreatePost}/>
         <Route exact path="/single/post/:id" component={SinglePost}/>
+        <Route exact path="/post/saved" component={SavedPost} />
       </Switch>
     </BrowserRouter>
   );

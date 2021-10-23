@@ -6,7 +6,8 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      user: sessionStorage.getItem('profile')
+      user: sessionStorage.getItem('profile'),
+      email: sessionStorage.getItem('email')
     };
   }
 
@@ -15,6 +16,7 @@ class Header extends Component {
   handleLogout = (e) => {
     e.preventDefault();
    sessionStorage.removeItem('email');
+   sessionStorage.removeItem('profile');
    sessionStorage.removeItem('username');
    sessionStorage.removeItem('loggedIn');
    window.location.reload();
@@ -64,11 +66,11 @@ class Header extends Component {
                   <i className="far fa-envelope fa-2x"></i>
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a href="." className="nav-link px-2 link-dark mt-1">
                   <i className="far fa-heart fa-2x"></i>
                 </a>
-              </li> */}
+              </li>
               <li>
                 <div className="dropdown mt-2">
                   <button
@@ -89,10 +91,21 @@ class Header extends Component {
                   <ul className="dropdown-menu" aria-labelledby="dLabel">
                     <li className="nav-link px-2 link-dark">
                       <Link
-                        to="/user"
+                        to={"/user/" + this.state.email}
                         style={{ color: "black", textDecoration: "none" }}
                       >
                         <i className="fas fa-user"></i>&nbsp;&nbsp;Profile
+                      </Link>
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="nav-link px-2 link-dark"
+                    >
+                      <Link
+                        to="/post/saved/"
+                        style={{ color: "black", textDecoration: "none" }}
+                      >
+                      <i className="fas fa-bookmark"></i>&nbsp;&nbsp;Saved Posts
                       </Link>
                     </li>
                     <li
