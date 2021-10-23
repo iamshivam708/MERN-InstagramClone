@@ -7,7 +7,9 @@ class SuggestedUsers extends Component {
     
         this.state = {
              email:sessionStorage.getItem("email"),
-             suggestedUsers:[]
+             suggestedUsers:[],
+             follow:[],
+             users:[],
         }
     }
 
@@ -15,13 +17,23 @@ class SuggestedUsers extends Component {
         let user={
             email:this.state.email
         }
-        axios.post('http://localhost:5000/user/getAllUsers',user).then((res) =>{
-            this.setState({
-                suggestedUsers:res.data
+
+        axios.post('http://localhost:5000/user/trying', user).then((res) =>{
+             this.setState({
+                follow: res.data.follow,
+                users: res.data.user
             })
-        }).catch((err) =>{
-            console.log(err)
+            const {users,follow} = this.state
+            var c = users.filter(function(objFromA) {
+                return !follow.find(function(objFromB) {
+                  return objFromA.email === objFromB.userEmail
+                })
+              })
+            this.setState({
+                suggestedUsers: c
+            })
         })
+
     }
 
     handleFollow(email){
@@ -35,7 +47,7 @@ class SuggestedUsers extends Component {
                 if(res.data.error){
                     alert(res.data.error)
                 }else{
-                    console.log(res.data);
+                    window.location.reload();
                 }
             }).catch((err) =>{
                 console.log(err);
@@ -44,6 +56,7 @@ class SuggestedUsers extends Component {
     }
     
     render() {
+        
         return (
             <div className="suggestedUser">
                 <div className="container-fluid" align="center">

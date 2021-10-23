@@ -1,9 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import Header from './Header'
-// import Story from './Story'
 import SuggestedUsers from './User/SuggestedUsers'
-//import axios from 'axios';
 
 class Main extends Component {
     constructor(props) {
@@ -26,7 +24,7 @@ class Main extends Component {
             axios.post("http://localhost:5000/post/followed",user).then((res) =>{
                 res.data.map((posts) =>{
                     posts.map((post) =>{
-                        postTry.push(post);
+                        return postTry.push(post);
                     })
                     return posts
                 })
@@ -48,12 +46,12 @@ class Main extends Component {
                     <div className="row">
                         <div className="col-8">
                         {/* <Story/> */}
-                        <h4>All Posts</h4>
+                        <h5 className="text-center" style={{padding:"10px 0px",background:"#eeeeee"}}>All posts of your friends</h5>
 
 
                         {this.state.posts.map((post) =>(
-                        <div className="container px-5" key={post._id}>
-                        <div className="card text-center mt-5">
+                        <div className="container" key={post._id}>
+                        <div className="card text-center mt-5 mb-4" style={{maxWidth:"80%"}}>
                             <div className="card-header text-start">
                                 <div className="row">
                                     <div className="col-2 mt-2">

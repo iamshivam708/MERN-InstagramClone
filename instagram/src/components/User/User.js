@@ -12,7 +12,10 @@ class User extends Component {
              following:0,
              followers:0,
              followingDetails:[],
-             followersDetails:[]
+             followersDetails:[],
+             posts:[],
+             post:0,
+             singlePost:[]
         }
     }
 
@@ -73,6 +76,24 @@ class User extends Component {
           console.log(err);
         })
 
+        axios.post('http://localhost:5000/post/user', user).then((res) =>{
+          this.setState({
+            posts:res.data
+          })
+        }).catch((err) =>{
+          console.log(err);
+        })
+
+        axios.post('http://localhost:5000/post/user/count', user).then((res) =>{
+          this.setState({
+            post:res.data.count
+          })
+        }).catch((err) =>{
+          console.log(err);
+        })
+
+        
+
       }
     }
 
@@ -84,7 +105,21 @@ class User extends Component {
           followerEmail: this.state.email
         }
         axios.post("http://localhost:5000/follow/unfollow", user).then((res) =>{
-          console.log(res)
+          window.location.reload();
+        }).catch((err) =>{
+          console.log(err);
+        })
+      }
+    }
+
+    handleRemove(email){
+      return event =>{
+        event.preventDefault();
+        let user = {
+          userEmail: this.state.email,
+          followerEmail: email
+        }
+        axios.post("http://localhost:5000/follow/unfollow", user).then((res) =>{
           window.location.reload();
         }).catch((err) =>{
           console.log(err);
@@ -106,7 +141,7 @@ class User extends Component {
               <h4>{user.userName}</h4>
               <div className="row mt-3">
                 <div className="col-3">
-                  <p>0 posts</p>
+                  <p>{this.state.post} posts</p>
                 </div>
                 <div className="col-3">
                 <button style={{border:"none",background:"none"}} data-bs-toggle="modal" data-bs-target="#staticBackdropIn">{this.state.followers} followers</button>
@@ -121,6 +156,15 @@ class User extends Component {
           
           <div className="row mt-4" align="center">
           <p className="text-muted"><i className="fas fa-th"></i> Posts</p>
+          <div className="row">
+            {this.state.posts.map((post) =>(
+              <button key={post._id} style={{border:"none",background:"none"}} data-bs-toggle="modal" data-bs-target="#staticBackdropPost">
+                <div  id="post" className="col-4 mb-4" style={{height:"300px"}}>
+                  <img id="picture" src={"/posts/"+post.image} height="100%" width="100%" alt="post" />
+                </div>
+              </button>
+            ))}
+          </div>
 
           {/* followings */}
           <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -158,9 +202,35 @@ class User extends Component {
                 {this.state.followersDetails.map((followers) =>(
                       <div className="row mt-3 px-1 py-2" style={{background:"#fafafa"}} key={followers._id}>
                         <div className="col-6">
-                          <h4>{followers.userEmail}</h4>
+                          <h4>{followers.followerEmail}</h4>
+                        </div>
+                        <div className="col-6" align="end">
+                          <button onClick={this.handleRemove(followers.followerEmail)} type="submit" className="btn btn-danger">X Remove</button>
                         </div>
                       </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+           {/* post */}
+           <div className="modal fade" id="staticBackdropPost" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-scrollable mt-5" style={{marginLeft:"20%"}}>
+              <div className="modal-content" style={{width:"60vw"}}>
+                <div className="modal-body" style={{height:"70vh"}}>
+                  {this.state.posts.map((post) =>(
+                  <div key={post._id} className="row" style={{margin:0,padding:0}}>
+                    <div className="col-7" style={{height:"65vh",margin:"0px",padding:"0px"}}>
+                      <img src={"/posts/"+ post.image} height="100%" width="100%" alt="post"/>
+                    </div>
+                    <div className="col-5">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="staticBackdropLabel">{post.title}</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    </div>
+                  </div>
                   ))}
                 </div>
               </div>

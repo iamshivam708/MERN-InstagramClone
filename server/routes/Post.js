@@ -59,4 +59,37 @@ router.get("/", async(req,res) =>{
     })
 })
 
+//get post according to user email
+router.post("/user", async(req,res) =>{
+    await Post.find({userEmail: req.body.email}).exec((err, posts) =>{
+        if(err){
+            res.status(200).send(err)
+        }else{
+            res.status(200).send(posts)
+        }
+    })
+})
+
+//get post count according to user email
+router.post("/user/count", async(req,res) =>{
+    await Post.find({userEmail: req.body.email}).count((err, count) =>{
+        if(err){
+            res.status(200).send(err)
+        }else{
+            res.status(200).send({count: count})
+        }
+    })
+})
+
+//get post from postId
+router.get("/user/:id", async(req,res) =>{
+    await Post.findById(req.params.id).exec((err, result) =>{
+        if(err){
+            res.status(200).send(err)
+        }else{
+            res.status(200).send(result)
+        }
+    })
+})
+
 module.exports = router

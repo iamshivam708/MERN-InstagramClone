@@ -55,6 +55,11 @@ class Header extends Component {
                 </a>
               </li>
               <li>
+                <Link to="/create" className="nav-link mt-1 px-2 link-secondary">
+                  <i className="fas fa-plus-square fa-2x"></i>
+                </Link>
+              </li>
+              <li>
                 <a href="." className="nav-link px-2 link-dark mt-1">
                   <i className="far fa-envelope fa-2x"></i>
                 </a>

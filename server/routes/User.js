@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User")
 const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer')
+const Follow = require('../models/Follow')
 
 const multer = require('multer');
 const { rawListeners } = require('../models/User');
@@ -93,6 +94,7 @@ router.post("/getAllUsers", async(req,res) =>{
   })
 })
 
+
 //forget password
 router.post("/forgot", (req,res) =>{
 
@@ -121,6 +123,15 @@ router.post("/forgot", (req,res) =>{
     }
     res.send(info.response)
   })
+})
+
+
+//show only users that are not followed
+router.post('/trying', async( req, res ) =>{
+  let user = await User.find({email:{$ne: req.body.email}}).limit(5)
+  let follow = await Follow.find({followerEmail:req.body.email}).limit(5)
+  res.json({user: user,follow:follow})
+  
 })
 
 module.exports = router
